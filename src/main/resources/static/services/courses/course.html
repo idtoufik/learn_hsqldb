@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add courses</title>
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet"
+	href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+    <script src = "/../../js/sanitize.js"></script>
+<script src="/../../js/global.js"></script>
+</head>
+<body ng-app="app">
+
+
+	<div nav-bar page="about"></div>
+	<br>
+
+
+	<div class="container">
+
+
+		<div ng-controller="cours">
+			<img src="{{cours.image}}" style="height: 200px;"
+				class="img-thumbnail  center-block" />
+			<h3>{{cours.subject}}</h3>
+			<div class= "well">{{cours.description}}</div>
+
+
+			<!-- listes des lessons -->
+			<h4>liste de lecons :</h4>
+            
+            
+            <table class="table">
+                <thead>
+                  <tr class = "row">
+                    <th class="col-xs-10 col-md-10 col-sd-10">lesson</th>
+                    <th class="col-xs-2 col-md-2  col-sd-2" ng-show="itIsHisCourse">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="lesson in cours.lessons"  class ="row"> 
+                        <td class="col-xs-2 col-md-2  col-sd-2">
+                            <a href="/services/lessons/lesson.html/#!/?idCourse={{cours.id}}&&idLesson={{lesson.id}}">
+                                {{lesson.title}}
+                            </a>
+                        </td> 
+                        <td class="col-xs-10 col-md-10 col-sd-10" ng-show="itIsHisCourse">
+                            <a href="/services/lessons/modLesson.html/#!/?idCourse={{cours.id}}&&idLesson={{lesson.id}}">
+                                <i class="glyphicon glyphicon-pencil smallbtn "></i>
+                            </a>
+                            <i class="glyphicon glyphicon-trash smallbtn" ng-click="deleteLesson(lesson.id)"></i>
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+                
+			<p>
+				<button class="btn btn-primary center-block" ng-click='addLesson()'  ng-show="itIsHisCourse">
+					Ajouter une Lecon
+				</button>
+			</p>
+		</div>
+		<script type="text/javascript" src="/services/courses/course.js">
+			
+		</script>
+
+
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Learn 2017</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

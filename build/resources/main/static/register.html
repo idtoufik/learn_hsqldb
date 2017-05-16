@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Register Form</title>
+
+<link rel="stylesheet" href="/style/style2.css">
+<script src="/style/jquery-3.1.1.js"></script>
+<link rel="stylesheet" href="/style/bootstrap/css/bootstrap.min.css">
+<script src="/style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/style/angular.min.js"></script>
+<script src = "js/sanitize.js"></script>
+<script src="/js/global.js"></script>
+<script src="/style/validator.min.js"></script>
+
+</head>
+
+<body ng-app="App">
+
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Register form :</h1>
+			</div>
+
+			<form class="login-form" ng-controller="registerCtrl"
+				data-toggle="validator" role="form" name="register">
+
+				<div class="form-group control-group">
+					<input type="text" class="login-field" value=""
+						placeholder="Prénom" id="firstName" ng-model="member.firstName"
+						data-error="le prenom doit au moins contenir 2 caractaires"
+						pattern="[A-Za-z]{2,}" required> <label
+						class="login-field-icon fui-user " for="login-name"></label>
+					<div class="help-block with-errors"></div>
+				</div>
+
+
+				<div class="form-group control-group">
+					<input type="text" class="login-field" placeholder="nom" id="name"
+						ng-model="member.name" pattern="[A-Za-z]{2,}"
+						data-error="le nom doit au moins contenir 2 caractaires" required>
+					<label class="login-field-icon fui-user" for="login-name"></label>
+					<div class="help-block with-errors"></div>
+				</div>
+
+				<div class="form-group control-group">
+					<input type="text" class="login-field" value="" name="pseudo"
+						placeholder="pseudo" id="pseudo" ng-model="member.pseudo"
+						pattern="[A-Za-z][A-Za-z1-9]{3,}"
+						data-remote="/resources/members/pseudo/validate"
+						data-pattern-error="un pseudo doit commancer par une lettre ,
+                                            et doit contenir au moins 4 caractaires alpha numeiques"
+						data-remote-error="ce pseudo existe deja"
+						 required> <label
+						class="login-field-icon fui-user" for="login-name"></label>
+					<div class="help-block with-errors"></div>
+				</div>
+
+				<div class="form-group control-group">
+					<input type="email" class="login-field" value="" name="email"
+						placeholder="mail@mail.com" id="email" ng-model="member.email"
+						data-remote-error="cette adresse mail existe deja"
+                        data-pattern-error = "veuillez inserez une adresse mail valide !"
+						data-remote="/resources/members/email/validate" required> <label
+						class="login-field-icon fui-user" for="email"></label>
+					<div class="help-block with-errors"></div>
+				</div>
+
+				<div class="form-group control-group">
+					<input type="password" class="login-field" value=""
+						placeholder="password" id="login-pass" ng-model="member.password"
+						data-error="le mot de passe doit contenir au moins 6 caractaires" data-minlength="6" required> <label
+						class="login-field-icon fui-lock" for="login-pass"></label>
+					<div class="help-block with-errors"></div>
+				</div>
+
+				<div class="form-group control-group">
+					<input type="password" class="login-field" value=""
+						placeholder="Confirm password" id="login-pass2"
+						data-match="#login-pass" data-match-error="les deux mot de passe sont differents"
+                           required> 
+                    <label class="login-field-icon fui-user" for="login-pass2" >
+                    </label>
+					<div class="help-block with-errors"></div>
+				</div>
+
+				<div class="form-group control-group">
+					<input type="date" class="login-field" value=""
+						placeholder="Date of birth : yyyy-mm-jj" id="dateBirth"
+						ng-model="member.date_of_birth" required> <label
+						class="login-field-icon fui-user" for="dateBirth"></label>
+				</div>
+
+				<div class="form-group">
+					<input class="btn btn-primary btn-large btn-block" type="submit"
+						value="Register" ng-click="clicked()" />
+					<div></div>
+				</div>
+			</form>
+			<script type="text/javascript">
+				var app = angular.module('App', []);
+				app.controller("registerCtrl", function($scope, $http,$location) {
+					$scope.member = {}
+
+					$scope.clicked = function() {
+						if ($scope.register.$valid && $("#login-pass").val() == $("#login-pass2").val()) {
+							$http.post("/resources/members", $scope.member)
+									.then(function() {
+										window.location = "/login.html"
+									})
+						}
+					}
+				});
+			</script>
+</body>
+</html>

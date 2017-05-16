@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-fixed-top" >
+
+  <div class="container" >
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/index.html">e-Learn</a>
+    </div>
+
+    <ul class="nav navbar-nav" >
+      <li id="accueil" class="{{page === 'accueil' ? 'active' : ''}}"><a href="/index.html">Accueil</a></li>
+      <li id="tuto" class="{{page === 'tutorials' ? 'active' : ''}}"><a href="/Tutorials.html">Tutorials</a></li>
+      
+      
+      <li id="tuto" class="dropdown" ng-show="{{member.length === undefined}}">
+        <a class="dropdown-toggle" data-toggle="dropdown" >Labs <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+                <a href="/labs/compile_C.html">C</a>
+            </li>
+            <li>
+                <a href="/labs/compile_c++.html">C++</a>
+            </li>
+            <li>
+                <a href="/labs/compile_python.html">Python</a>
+            </li>
+          </ul>
+      </li>
+      <!--<li id="communaute" class="{{ page === 'communaute' ? 'active' : '' }}"><a href="/Communaute.html">Communauté</a></li>
+      -->
+      
+      <li id="contactsus" class="{{page === 'contactus' ? 'active' : ''}}"><a href="/contactsus.html">Contacts-us</a></li>
+      <li id="about" class="{{page === 'about' ? 'active' : ''}}"><a href="/about.html">About</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right"  ng-show="!isLogged">
+      <li><a href="/login.html">LogIn</a></li>
+      <li><a href="/register.html">Register</a></li>
+     </ul>
+     
+     <ul class="nav navbar-nav navbar-right" ng-show="isLogged">
+			<li class="dropdown" >
+				<a class="dropdown-toggle" data-toggle="dropdown">{{member.firstName}}<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="/services/profil.html">Profile</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="/logout">Logout</a></li>
+					</ul>
+			</li>
+			
+    </ul>
+    
+  </div>
+
+
+</nav>

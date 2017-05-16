@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Acceuil</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../style/jquery-3.1.1.js"></script>
+    <link rel="stylesheet" href="../style/bootstrap/css/bootstrap.min.css">
+    <script src="../style/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- cODE Mirrior import -->
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/lib/codemirror.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/3024-day.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/3024-night.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/abcdef.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/ambiance.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/base16-dark.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/bespin.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/base16-light.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/blackboard.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/cobalt.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/colorforth.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/dracula.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/duotone-dark.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/duotone-light.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/eclipse.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/elegant.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/erlang-dark.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/hopscotch.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/icecoder.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/isotope.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/lesser-dark.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/liquibyte.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/material.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/mbo.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/mdn-like.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/midnight.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/monokai.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/neat.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/neo.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/night.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/panda-syntax.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/paraiso-dark.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/paraiso-light.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/pastel-on-dark.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/railscasts.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/rubyblue.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/seti.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/solarized.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/the-matrix.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/tomorrow-night-bright.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/tomorrow-night-eighties.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/ttcn.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/twilight.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/vibrant-ink.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/xq-dark.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/xq-light.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/yeti.css">
+    <link rel="stylesheet" href="../resources/CodeMirror-master/CodeMirror-master/theme/zenburn.css">
+    <script src="../resources/CodeMirror-master/CodeMirror-master/lib/codemirror.js"></script>
+    <script src="../resources/CodeMirror-master/CodeMirror-master/mode/javascript/javascript.js"></script>
+    <script src="../resources/CodeMirror-master/CodeMirror-master/addon/selection/active-line.js"></script>
+    <script src="../resources/CodeMirror-master/CodeMirror-master/addon/edit/matchbrackets.js"></script>
+
+	<script src="../style/angular.min.js"></script>
+  </head>
+<!-------------------------------------->
+  <body ng-app="app">
+    
+   <script src="/js/sanitize.js"></script>
+   <script src="../js/global.js"></script>
+   <div nav-bar page="labs"></div>
+
+    <div class="container" ng-controller="compile">
+      <div class="row">
+        <h1 class="page-header">VLab :
+            <small>Python </small>
+        </h1>
+      </div>
+
+        <div class="row">
+
+          <p>Select a theme:
+              <select onchange="selectTheme()" id="select">
+                  <option selected>default</option>
+                  <option>3024-day</option>
+                  <option>3024-night</option>
+                  <option>abcdef</option>
+                  <option>ambiance</option>
+                  <option>base16-dark</option>
+                  <option>base16-light</option>
+                  <option>bespin</option>
+                  <option>blackboard</option>
+                  <option>cobalt</option>
+                  <option>colorforth</option>
+                  <option>dracula</option>
+                  <option>duotone-dark</option>
+                  <option>duotone-light</option>
+                  <option>eclipse</option>
+                  <option>elegant</option>
+                  <option>erlang-dark</option>
+                  <option>hopscotch</option>
+                  <option>icecoder</option>
+                  <option>isotope</option>
+                  <option>lesser-dark</option>
+                  <option>liquibyte</option>
+                  <option>material</option>
+                  <option>mbo</option>
+                  <option>mdn-like</option>
+                  <option>midnight</option>
+                  <option>monokai</option>
+                  <option>neat</option>
+                  <option>neo</option>
+                  <option>night</option>
+                  <option>panda-syntax</option>
+                  <option>paraiso-dark</option>
+                  <option>paraiso-light</option>
+                  <option>pastel-on-dark</option>
+                  <option>railscasts</option>
+                  <option>rubyblue</option>
+                  <option>seti</option>
+                  <option>solarized dark</option>
+                  <option>solarized light</option>
+                  <option>the-matrix</option>
+                  <option>tomorrow-night-bright</option>
+                  <option>tomorrow-night-eighties</option>
+                  <option>ttcn</option>
+                  <option>twilight</option>
+                  <option>vibrant-ink</option>
+                  <option>xq-dark</option>
+                  <option>xq-light</option>
+                  <option>yeti</option>
+                  <option>zenburn</option>
+              </select>
+            </p>
+          <form>
+              <textarea id="code" name="code" >// your code here</textarea>
+              <br>
+
+              
+              <button ng-click="donwloadCode()">Download code</button>
+				<input type="submit" value="Executer" ng-click="executer()" />
+
+          </form>
+
+        </div>
+        <br>
+        <div class="row" >
+            <textarea readonly class="result">{{getCode}}</textarea>
+        </div>
+	<script>
+
+			app.controller("compile", function($scope, $http) {
+				//$scope.script = {}
+				$scope.executer = function() {
+					code = editor.getValue()
+					$http({
+						url :"/resources/compilePython",
+						method: 'POST',
+						headers:{
+							'Content-Type': 'text/html'
+						},
+						data: code,
+						transformResponse:[function(data){
+							return data
+						}]
+					}).then(function(data) {
+						$scope.getCode = data.data;
+						console.log(data)
+					});
+					
+
+				}
+
+				$scope.donwloadCode = function() {
+					var codeText = editor.getValue()
+					var textFileAsBlob = new Blob([ codeText ], {
+						type : 'text/x-xsrc'
+					});
+					var fileNameToSaveAs = "code.py";
+					console.log("blob here -->",textFileAsBlob)
+
+					var downloadLink = document.createElement("a");
+					downloadLink.download = fileNameToSaveAs;
+					downloadLink.innerHTML = "Download File";
+					if (window.webkitURL != null) {
+						// Chrome allows the link to be clicked without actually adding it to the DOM.
+						downloadLink.href = window.webkitURL
+								.createObjectURL(textFileAsBlob);
+					} else {
+						// Firefox requires the link to be added to the DOM before it can be clicked.
+						downloadLink.href = window.URL
+								.createObjectURL(textFileAsBlob);
+						downloadLink.onclick = destroyClickedElement;
+						downloadLink.style.display = "none";
+						document.body.appendChild(downloadLink);
+					}
+
+					downloadLink.click();
+				}
+
+				function destroyClickedElement(event) {
+					// remove the link from the DOM
+					document.body.removeChild(event.target);
+				}
+
+			});
+		</script>
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Learn 2017</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            styleActiveLine: true,
+            matchBrackets: true
+        });
+        var input = document.getElementById("select");
+        function selectTheme() {
+            var theme = input.options[input.selectedIndex].textContent;
+            editor.setOption("theme", theme);
+            location.hash = "#" + theme;
+        }
+        var choice = (location.hash && location.hash.slice(1)) ||
+            (document.location.search &&
+            decodeURIComponent(document.location.search.slice(1)));
+        if (choice) {
+            input.value = choice;
+            editor.setOption("theme", choice);
+        }
+        CodeMirror.on(window, "hashchange", function() {
+            var theme = location.hash.slice(1);
+            if (theme) { input.value = theme; selectTheme(); }
+        });
+    </script>
+
+  </body>
+</html>

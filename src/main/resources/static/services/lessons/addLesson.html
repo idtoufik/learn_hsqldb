@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add courses</title>
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet"
+	href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+<script src="/../../resources/ckeditor/ckeditor.js"></script>
+<script src = "/../../js/sanitize.js"></script>
+<script src="/../../js/global.js"></script>
+<script src="/style/validator.min.js"></script>
+
+</head>
+<body ng-app="app">
+
+
+	<div nav-bar page="about" member="member"></div>
+	
+
+	<div class="container" ng-controller="addLesson">
+
+		<h1>Content of lesson</h1>
+
+		
+		<form >
+			<div class="form-group" >
+				<label for="Subject">Subject</label> <input type="text"
+					class="form-control" id="Subject" placeholder="Subject" ng-model="lesson.title"
+					pattern=".{4,}" data-error="{4,}">
+					<div class="help-block with-errors"></div>
+			</div>
+
+			<textarea name="editor1" id="decription" rows="10" cols="10" >
+				contenu du cours
+			</textarea>
+			<script type="text/javascript">
+				CKEDITOR.replace('editor1');
+			</script>
+			<br />
+
+			<input type="submit" class="btn btn-primary center-block" value="Save" ng-click="addcours()" />
+		</form>
+
+		<div id="confirmationModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">{{dialog.title}}</h4>
+					</div>
+					<div class="modal-body">
+						<p>{{dialog.content}}</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="redirection()" >Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Learn 2017</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	
+	<script type="text/javascript">
+			app.controller("addLesson", function($scope, $http, $location) {
+				$scope.lesson = {};
+				idC = $location.search().idCours
+				var done = false;
+				if(idC == undefined)
+					window.location = "/";
+				
+				$scope.dialog = {
+						
+						"title" : "confirmation",
+						"content" : "la lesson a bien ete ajoutée",
+						"ok" : {
+							"title" : "confirmation",
+							"content" : "la lesson a bien ete ajoutée"
+						},
+					
+						"error" : {
+							"title" : "erreur",
+							"content" : "la Lesson n'a pa pu etre ajouté, le champ titre doit contenir au moins 4 caracteres, la lesson doit au moit contenir quelques catactaires"
+                                        
+					
+						}
+				}
+				
+				
+				$scope.redirection = function(){
+					if(done)
+						window.location = "/services/courses/course.html/#!/?idCourse="+idC
+				}
+				
+				
+				$scope.addcours = function() {
+					var data = CKEDITOR.instances.decription.getData();
+					$scope.lesson.content = data.toString();
+					console.log("idcours : "+ idC)
+					console.log($scope.lesson)
+					
+					
+					$http.post("/resources/courses/"+idC+"/lessons", $scope.lesson)
+					.then(function(data) {
+						//window.location = "/services/profil.html";
+						if(data.data === true)
+						{
+							$scope.dialog.title = $scope.dialog.ok.title
+							$scope.dialog.content = $scope.dialog.ok.content
+							done = true;
+						}
+						else
+							{
+								$scope.dialog.title = $scope.dialog.error.title
+								$scope.dialog.content = $scope.dialog.error.content
+							}
+						$("#confirmationModal").modal("show");
+					});
+				}
+				
+			});
+		</script>
+	
+	
+</body>
+</html>

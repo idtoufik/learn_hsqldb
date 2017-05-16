@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet" href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+<script src="/../../resources/ckeditor/ckeditor.js"></script>
+
+
+</head>
+<body ng-app="app">
+
+	<div>
+		<div nav-bar page="profile"></div>
+	</div>
+
+
+	<div class="container" ng-controller="user">
+
+
+		<ul class="nav nav-tabs" style="padding-top: 20px;">
+			<li role="presentation" class="active profil"><a id="profil">Profil</a></li>
+			<li role="presentation" class="modif"><a id="modif" >Parametres</a></li>
+		</ul>
+
+
+		<div class="div1" >
+			<div >
+				
+				<br>
+				<p>Pseudo : {{member.pseudo}}</p>
+				<p>Name : {{member.name}}</p>
+				<p>First name : {{member.firstName}}</p>
+				<p>E-mail : {{member.email}}</p>
+				<p>Date of birth : {{member.date_of_birth | date : 'dd/MM/yyyy'}}</p>
+				<p>Date of registration : {{member.dateOfRegistration | date : 'medium'}}  </p>
+				<h3>Liste des cours</h3>
+
+				<div class="row">
+					<div class="col-md-3 col-sm-6" ng-repeat="c in member.courses">
+						<div class="panel panel-default text-center">
+							<div class="panel-heading">
+								<span class="fa-stack fa-5x"> <img
+									src="{{c.image}}" style="height: 140px;" />
+								</span>
+							</div>
+							<div class="panel-body">
+								<h4>{{c.subject}}</h4>
+								<p>{{c.description}}</p>
+
+								<a href="/services/courses/course.html/#!/?idCourse={{c.id}}" class="btn btn-primary">Learn More</a>
+                                
+							</div>
+                            <div>
+                                <a href="/services/courses/modCourse.html/#!/?idCourse={{c.id}}"><i class="glyphicon glyphicon-cog smallbtn"></i></a>
+                                <span class="glyphicon glyphicon-trash smallbtn" ng-click="deleteCourse(c.id)"></span>
+                            </div>
+						</div>
+					</div>
+                    
+				</div>
+			</div>
+            
+            <p><a href="/services/courses/addCourses.html"><button class="btn btn-primary center-block">Ajouter un cours</button></a></p>
+		</div>
+		
+		<div class="div2" style="display: none;" >
+            
+			<p class = " form-group"> 
+                <lable for="pseudo">Pseudo</lable>  
+                <input type="text" class="login-field form-control" value="{{member.pseudo}}"  id="pseudo" ng-model="member.pseudo"
+                       pattern="[A-Za-z][A-Za-z1-9]{3,}" required> 
+            </p> 
+			<p class = " form-group"> 
+                <lable for = "name">Nom</lable> 
+                <input type="text" class="login-field form-control" value="{{member.name}}"  id="name" ng-model="member.name" 
+                       pattern="[A-Za-z]{2,}" required
+                       >
+            </p> 
+			
+            <p class = "form-group"> 
+                <label for = "firstName">Prenom  </label>
+                <input type="text" class="login-field form-control" value=" {{member.firstName}} " id="firstName" ng-model="member.firstName" pattern="[A-Za-z]{2,}" required> 
+            </p>
+			<p class = " form-group"> 
+                <lable for="email">e-mail</lable>  
+                <input type="email" class="login-field form-control" value="{{member.email}}"  id="email" ng-model="member.email"> 
+            </p>
+			<p class = " form-group">
+                <lable for="dateBirth">Date of birth</lable>  
+                <input type="date" class="login-field form-control" value="{{member.date_of_birth}}" id="dateBirth" ng-model="member.date_of_birth" required>
+            </p>
+            <button class="btn btn-primary center-block "   ng-click="saveModMember()">
+                Enregister les modifications
+            </button>
+		</div>
+
+
+
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Learn 2017</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+    <script src = "../js/sanitize.js"></script>
+	<script src="../js/global.js"></script>
+    <script src="profil.js" type="application/javascript"></script>
+	<script type="text/javascript">
+	
+		$('#profil').click(
+				function() {
+					$('.div2').hide();
+					$('.div1').show();
+					$('.modif').removeClass('active');
+					$('.profil').addClass('active');
+				});
+		$('#modif').click(
+				function() {
+					$('.div2').show();
+					$('.div1').hide();
+					$('.profil').removeClass('active');
+					$('.modif').addClass('active');
+				});
+	</script>
+</body>
+</html>

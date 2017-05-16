@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add courses</title>
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet"
+	href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+<script src="/../../resources/ckeditor/ckeditor.js"></script>
+<script src = "/../../js/sanitize.js"></script>
+<script src="/../../js/global.js"></script>
+<script src="/style/validator.min.js"></script>
+
+</head>
+<body ng-app="app">
+
+
+	<div nav-bar page="about" member="member"></div>
+	
+
+	<div class="container" ng-controller="addLesson">
+
+		<h1>Content of lesson</h1>
+
+		
+		<form name ="modificationForm">
+			<div class="form-group" >
+				<label for="Subject">Subject</label> <input type="text"
+					class="form-control" id="Subject" placeholder="Subject" ng-model="lesson.title"
+					pattern=".{4,}" data-error="{4,}" required>
+					<div class="help-block with-errors"></div>
+			</div>
+
+			<textarea name="editor1" id="decription" rows="10" cols="10"  required>
+				contenu du cours
+			</textarea>
+			<script type="text/javascript">
+				CKEDITOR.replace('editor1');
+			</script>
+			<br />
+
+			<input type="submit" class="btn btn-primary center-block" value="Save" ng-click="modLesson()" />
+		</form>
+
+		<div id="confirmationModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">erreur</h4>
+					</div>
+					<div class="modal-body">
+						<p>
+							la lesson n'a pas pu etre modifié, veulleiz respecter les contraintes suivantes: <br>
+								la titre doit contenire au moins 4 caracteres<br>
+								la lesson doit etre plus longue
+						
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Learn 2017</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+	
+	<script type="text/javascript">
+			app.controller("addLesson", function($scope, $http, $location) {
+				$scope.lesson = {};
+				idl = $location.search().idLesson
+				
+				$scope.modLesson = function() {
+					var data = CKEDITOR.instances.decription.getData();
+					$scope.lesson.content = data.toString();
+                    
+					
+					if(!$scope.modificationForm.$valid  || data.length < 11 )
+						{
+							$("#confirmationModal").modal("show");
+							return;
+						}
+						
+					
+					$scope.lesson.content = CKEDITOR.instances.decription.getData();
+					console.log($scope.lesson)
+					
+					$http.put("/resources/courses/0/lessons/"+idl, $scope.lesson)
+					.then(function(data) {
+						window.location = "/services/lessons/lesson.html/#!/?idCours=11&idLesson=" + idl;
+						
+					});
+				}
+				
+				if(idl == undefined)
+					window.location = "/";
+				
+				$http.get("/resources/courses/3/lessons/"+idl)
+					.then(function(result){
+						$scope.lesson.title = result.data.title
+                    $scope.lesson.content = result.data.content;
+						CKEDITOR.instances.decription.setData(result.data.content)
+						console.log(result.data)
+					})
+				
+				
+			});
+		</script>
+	
+	
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Acceuil</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="style/jquery-3.1.1.js"></script>
+    <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
+    <script src="style/bootstrap/js/bootstrap.min.js"></script>
+    <script src="style/angular.min.js"></script>
+    <script src = "js/sanitize.js"></script>
+    <script src="js/global.js"></script>
+	
+  </head>
+<!--- ________________________________ -->
+<body ng-app="app" >
+  
+   <div>
+   		<div nav-bar page="tutorials" ></div>
+   </div>
+    <br>
+
+
+    
+        <div class="container">
+
+          
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive center-block" src="/images/Learn.jpg" alt="">
+                </div>
+            </div>
+
+            <h2 class="page-header">Liste des cours Disponibles</h2>
+
+            
+            <div class="row" ng-controller="AppCtrl2">
+                <div class="col-md-3 col-sm-6"  ng-repeat="c in sujet">
+                    <div class="panel panel-default text-center" >
+                        <div class="panel-heading">
+                          <span class="fa-stack fa-5x">
+                            <img src="{{c.image}}" style="height: 140px;" />
+                          </span>
+                        </div>
+                        <div class="panel-body" >
+                            <h4>{{c.subject}}</h4>
+                            <p>{{c.description}}</p>
+                     
+                            <a href="/services/courses/course.html/#!/?idCourse={{c.id}}" class="btn btn-primary">Learn More</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- script src="js/tutorial.js"> </script-->
+            <!-- ________________________end of test __________________________ -->
+            <div class="row"></div>
+
+            <hr>
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Learn 2017</p>
+                    </div>
+                </div>
+            </footer>
+
+          </div>
+  </body>
+</html>

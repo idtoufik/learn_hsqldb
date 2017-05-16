@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add courses</title>
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet"
+	href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+<script src="/../../resources/ckeditor/ckeditor.js"></script>
+    <script src = "/../../js/sanitize.js"></script>
+<script src="/../../js/global.js"></script>
+
+</head>
+<body ng-app="app">
+
+
+	<div nav-bar page="about" member="member"></div>
+
+
+	<div class="container" ng-controller="addCourses">
+
+		<h1>Contenu du cours</h1>
+
+		<form  name="courseForm">
+			<div class="form-group">
+				<label for="Subject">Subject</label> <input type="text"
+					class="form-control" id="Subject" placeholder="Subject"
+					ng-model="course.subject" pattern=".{4,}" required>
+			</div>
+
+			<div class="form-group">
+				<image id="preview" width="100" />
+				<label for="exampleInputFile">Image input</label> <input type="file"
+					id="cover" accept="image/*" class="btn btn-secondary">
+				<p class="help-block">image pour la couverture .</p>
+
+			</div>
+
+			<div class="form-group">
+				<label for="description">description:</label>
+				<textarea id="description" class="form-control"
+					ng-model="course.description" pattern=".{4,}" required>
+				</textarea>
+			</div>
+
+			<input type="submit" class="btn btn-primary center-block" value="Save"
+				ng-click="addcours()" />
+		</form>
+		<div id="confirmationModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">erreur</h4>
+					</div>
+					<div class="modal-body">
+						<p>le Cours n'a pa pu etre ajouté, veuillez corriger les erreur(s) signalé(s)</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							ng-click="redirection()">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			app.controller("addCourses", function($scope, $http) {
+				$scope.course = {};
+				$scope.dialog = {
+						
+						"title" : "confirmation",
+						"content" : "la lesson a bien ete ajoutée",
+						"ok" : {
+							"title" : "confirmation",
+							"content" : "la lesson a bien ete ajoutée"
+						},
+					
+						"error" : {
+							"title" : "erreur",
+							"content" : "la Lesson n'a pa pu etre ajouté, le champ titre doit contenir au moins 4 caracteres"
+					
+						}
+				}
+				
+				
+				$("#cover").change(function(){
+					console.log(this)
+					file = new FileReader();
+					
+					if( document.getElementById('cover').files[0] )
+					{
+						file.addEventListener("load", function(e){
+							
+							$("#preview").attr('src', e.target.result)
+							
+						});
+						file.readAsDataURL(document.getElementById('cover').files[0]);
+					}
+						
+				})
+				
+				
+				$scope.addcours = function() {
+					
+					if(!$scope.courseForm.$valid)
+					{
+						$scope.dialog.title = $scope.dialog.ok.title;
+						$scope.dialog.content = $scope.dialog.ok.content;
+						$("#confirmationModal").modal("show");
+						return;
+					}
+						
+					
+					file = new FileReader();
+					//$scope.course.image = "";
+					
+					if( document.getElementById('cover').files[0] ){
+						file.addEventListener("load", function(e) {
+							img_b64 = e.target.result
+							$scope.course.image = img_b64;
+							console.log( $scope.course.image )
+							$http.post("/resources/courses", $scope.course)
+							.then(function() {
+								window.location = "/services/profil.html";
+							});
+							
+						});
+						file.readAsDataURL(document.getElementById('cover').files[0]);
+					}else{
+						$http.post("/resources/courses", $scope.course)
+						.then(function() {
+							window.location = "/services/profil.html";
+							//console.log("ajouter avec succes");
+						});
+					}
+		
+				}
+				
+			});
+		</script>
+
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Learn 2017</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>
